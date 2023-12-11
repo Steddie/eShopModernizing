@@ -1,0 +1,48 @@
+﻿@page "/"
+@namespace eShopTelerikBlazorServer.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Localization
+@using System.Globalization
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eShopTelerikBlazorServer</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="eShopTelerikBlazorServer.styles.css" />
+    <link rel="stylesheet" href="https://blazor.cdn.telerik.com/blazor/4.5.0/kendo-theme-default/swatches/default-ocean-blue.css" />
+    <link rel="stylesheet" href="https://blazor.cdn.telerik.com/blazor/4.5.0/kendo-font-icons/font-icons.css" />
+    <script src="https://blazor.cdn.telerik.com/blazor/4.5.0/telerik-blazor.min.js" defer></script>
+</head>
+<body class="k-body">
+
+    @* Culture cookie start *@
+
+    @{
+        this.HttpContext.Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(CultureInfo.CurrentCulture, CultureInfo.CurrentUICulture))
+        );
+    }
+
+    @* Culture cookie end *@
+
+    <component type="typeof(App)" render-mode="ServerPrerendered" />
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>
